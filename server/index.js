@@ -17,8 +17,6 @@ app.use(
       "http://localhost:5173",
       "http://localhost:5174",
       "http://localhost:5175",
-      "https://online-group-study-41ffa.web.app",
-      "https://online-group-study-41ffa.firebaseapp.com"
     ],
     credentials: true,
   })
@@ -78,27 +76,36 @@ async function run() {
 
 
 app.post("/assignments", async(req, res)=>{
-  const item = req.body;
-  const result = await assignmentCollection.insertOne(item);
-  res.send(result)
-  console.log(result);
-  
-})
+  try {
+    const item = req.body;
+    const result = await assignmentCollection.insertOne(item);
+    res.send(result);
+  } catch (err) {
+    console.error("Error creating assignment:", err.message);
+    res.status(500).send({ error: err.message });
+  }
+});
 
 app.post("/submittedAssignment", async(req, res)=>{
-  const item = req.body;
-  const result = await submittedAssignment.insertOne(item);
-  res.send(result)
-  console.log(result);
-  
-})
+  try {
+    const item = req.body;
+    const result = await submittedAssignment.insertOne(item);
+    res.send(result);
+  } catch (err) {
+    console.error("Error submitting assignment:", err.message);
+    res.status(500).send({ error: err.message });
+  }
+});
 
-
-
-app.get("/submittedAssignment",   async(req, res)=>{
-  const result = await submittedAssignment.find().toArray();
-  res.send(result)
-})
+app.get("/submittedAssignment", async(req, res)=>{
+  try {
+    const result = await submittedAssignment.find().toArray();
+    res.send(result);
+  } catch (err) {
+    console.error("Error fetching submitted assignments:", err.message);
+    res.status(500).send({ error: err.message });
+  }
+});
 
 
 app.get("/submittedAssignment/:email", async (req, res) => {
@@ -183,12 +190,16 @@ app.post("/logout", async (req, res) => {
 
   
 app.get('/assignments', async (req, res) => {
-  const  filter = req.query.filter
-  console.log(filter);
-  let query={}
-  if(filter) query ={ difficultyLevel: filter}
-  const result = await assignmentCollection.find(query).toArray()
-  res.send(result)
+  try {
+    const filter = req.query.filter;
+    let query = {};
+    if (filter) query = { difficultyLevel: filter };
+    const result = await assignmentCollection.find(query).toArray();
+    res.send(result);
+  } catch (err) {
+    console.error("Error fetching assignments:", err.message);
+    res.status(500).send({ error: err.message });
+  }
 });
 
 
@@ -242,12 +253,15 @@ app.post("/submittedAssignment/:id", async (req, res) => {
   }
 });
 
-    // Send a ping to confirm a successful connection
-    // await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    try {
+      await client.connect();
+      await client.db("admin").command({ ping: 1 });
+      console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    } catch (connectionError) {
+      console.error("MongoDB Connection Warning/Error:", connectionError.message);
+    }
   } finally {
-    // Ensures that the client will close when you finish/error
-    // await client.close();
+    // Keep connection open for incoming API requests
   }
 }
 run().catch(console.dir);

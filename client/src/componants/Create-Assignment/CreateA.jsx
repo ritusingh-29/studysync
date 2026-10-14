@@ -69,55 +69,8 @@ const CreateA = () => {
               </h1>
 
               <p className="mt-4 text-gray-500 dark:text-gray-400">
-                Prepare for your assignment by verifying your account and
-                setting up your profile. Get started now for success!
+                Fill in the details below and your assignment will be shared with your study group instantly.
               </p>
-
-              <div className="mt-6">
-                <h1 className="text-gray-500 dark:text-gray-300">
-                  Select type of account
-                </h1>
-
-                <div className="mt-3 md:flex md:items-center md:-mx-2">
-                  <button className="flex justify-center w-full px-6 py-3 text-white bg-blue-500 rounded-lg md:w-auto md:mx-2 focus:outline-none">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-6 h-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                      />
-                    </svg>
-
-                    <span className="mx-2">Student</span>
-                  </button>
-
-                  <button className="flex justify-center w-full px-6 py-3 mt-4 text-blue-500 border border-blue-500 rounded-lg md:mt-0 md:w-auto md:mx-2 dark:border-blue-400 dark:text-blue-400 focus:outline-none">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-6 h-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                      />
-                    </svg>
-
-                    <span className="mx-2">Admin</span>
-                  </button>
-                </div>
-              </div>
 
               <form
                 onSubmit={handleSubmit}

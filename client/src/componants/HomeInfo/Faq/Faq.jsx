@@ -1,96 +1,90 @@
+import { useState } from "react";
 
+const faqs = [
+    {
+        question: "How do I create an assignment?",
+        answer:
+            "Register or log in, then click 'Create Assignment' in the navbar. Fill in the title, thumbnail URL, marks, difficulty level, due date and description — your assignment appears instantly for your study group.",
+    },
+    {
+        question: "Who can give marks on my submission?",
+        answer:
+            "Any friend from your study group can examine your submission and give marks — but no one can mark their own assignment, so grading always stays fair.",
+    },
+    {
+        question: "Can I edit or delete an assignment I created?",
+        answer:
+            "Yes. Open the assignment from the Assignments page and use the update button to edit it, or delete it entirely if it's no longer needed.",
+    },
+    {
+        question: "How do I submit an attempt for an assignment?",
+        answer:
+            "Open an assignment's details page, hit 'Take Assignment' and fill in the submission form. Your attempt shows up under Pending Assignments until a friend grades it.",
+    },
+    {
+        question: "Is StudySync free to use?",
+        answer:
+            "Absolutely. StudySync is completely free — create an account with your email, Google or GitHub and start collaborating right away.",
+    },
+];
 
 const Faq = () => {
+    const [openIndex, setOpenIndex] = useState(0);
+
     return (
-        <div>
-           <section className=" dark:bg-gray-900">
-    <div className="container px-6 py-12 mx-auto">
-        <h1 className="text-2xl font-semibold text-center text-gray-800 lg:text-3xl dark:text-white">Have any Questions?</h1>
+        <section className="bg-white">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 py-16 lg:py-20">
+                <h1 className="text-3xl lg:text-4xl font-bold text-center text-slate-800">
+                    Frequently Asked Questions
+                </h1>
+                <p className="mt-4 text-center text-slate-500">
+                    Everything you need to know about studying with StudySync.
+                </p>
 
-        <div className="mt-8 xl:mt-16 lg:flex lg:-mx-12">
-            <div className="lg:mx-12">
-                <h1 className="text-xl font-semibold text-gray-800 dark:text-white">Table of Content</h1>
-
-                <div className="mt-4 space-y-4 lg:mt-8">
-                    <a href="#" className="block text-blue-500 dark:text-blue-400 hover:underline">General</a>
-                    <a href="#" className="block text-gray-500 dark:text-gray-300 hover:underline">Trust & Safety</a>
-                    <a href="#" className="block text-gray-500 dark:text-gray-300 hover:underline">Services</a>
-                    <a href="#" className="block text-gray-500 dark:text-gray-300 hover:underline">Billing</a>
-                    <a href="#" className="block text-gray-500 dark:text-gray-300 hover:underline">Office Cleaning</a>
+                <div className="mt-10 space-y-4">
+                    {faqs.map((faq, index) => {
+                        const isOpen = openIndex === index;
+                        return (
+                            <div
+                                key={faq.question}
+                                className={`border rounded-2xl transition-colors ${
+                                    isOpen
+                                        ? "border-indigo-200 bg-indigo-50/50"
+                                        : "border-slate-200 bg-white hover:border-indigo-100"
+                                }`}
+                            >
+                                <button
+                                    onClick={() => setOpenIndex(isOpen ? null : index)}
+                                    className="w-full flex items-center justify-between gap-4 text-left px-6 py-5 focus:outline-none"
+                                    aria-expanded={isOpen}
+                                >
+                                    <span className="font-semibold text-slate-800">{faq.question}</span>
+                                    <svg
+                                        className={`w-5 h-5 shrink-0 text-indigo-600 transition-transform duration-300 ${
+                                            isOpen ? "rotate-180" : ""
+                                        }`}
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                                <div
+                                    className={`grid transition-all duration-300 ease-in-out ${
+                                        isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                                    }`}
+                                >
+                                    <div className="overflow-hidden">
+                                        <p className="px-6 pb-5 text-slate-500 leading-relaxed">{faq.answer}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
-
-            <div className="flex-1 mt-8 lg:mx-12 lg:mt-0">
-                <div>
-                    <button className="flex items-center focus:outline-none">
-                        <svg className="flex-shrink-0 w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 12H4"></path></svg>
-
-                        <h1 className="mx-4 text-xl text-gray-700 dark:text-white">How i can play for my appoinment ?</h1>
-                    </button>
-
-                    <div className="flex mt-8 md:mx-10">
-                        <span className="border border-blue-500"></span>
-
-                        <p className="max-w-3xl px-4 text-gray-500 dark:text-gray-300">
-                        To schedule an appointment for your app, navigate to the scheduling section. Choose your desired date and time, then fill out the required information. Confirm your appointment to complete the process.
-
-                        </p>
-                    </div>
-                </div>
-
-                <hr className="my-8 border-gray-200 dark:border-gray-700" />
-
-                <div>
-                    <button className="flex items-center focus:outline-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 w-6 h-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
-                        </svg>
-
-                        <h1 className="mx-4 text-xl text-gray-700 dark:text-white">What can i expect at my first consultation ?</h1>
-                    </button>
-                </div>
-
-                <hr className="my-8 border-gray-200 dark:border-gray-700" />
-
-                <div>
-                    <button className="flex items-center focus:outline-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 w-6 h-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
-                        </svg>
-
-                        <h1 className="mx-4 text-xl text-gray-700 dark:text-white">What are your opening house ?</h1>
-                    </button>
-                </div>
-
-                <hr className="my-8 border-gray-200 dark:border-gray-700" />
-
-                <div>
-                    <button className="flex items-center focus:outline-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 w-6 h-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
-                        </svg>
-
-                        <h1 className="mx-4 text-xl text-gray-700 dark:text-white">Do i need a referral ?</h1>
-                    </button>
-                </div>
-
-                <hr className="my-8 border-gray-200 dark:border-gray-700" />
-
-                <div>
-                    <button className="flex items-center focus:outline-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 w-6 h-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
-                        </svg>
-
-                        <h1 className="mx-4 text-xl text-gray-700 dark:text-white">Is the cost of the appoinment covered by private health insurance ?</h1>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
- 
-        </div>
+        </section>
     );
 };
 

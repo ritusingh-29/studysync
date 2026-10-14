@@ -73,24 +73,16 @@ const Login = () => {
     };
 
     return (
-        <div
-        
-            className="hero min-h-screen"
-            style={{
-                backgroundImage:
-                    "url(https://img.freepik.com/premium-vector/white-gray-wave-abstract-background-soft-design-graphic-work_41084-469.jpg?size=626&ext=jpg&ga=GA1.1.1369675164.1715212800&semt=ais)",
-            }}
-        >
+        <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-violet-50 flex items-center py-10">
             <Helmet><title>LogIn</title></Helmet>
-           <div className="lg:flex items-center gap-10">
-           <div>
+           <div className="mx-auto px-4 lg:flex items-center gap-10 max-w-5xl">
+           <div className="hidden lg:block">
                 <img src={logo} alt="" />
 
             </div>
             <div>
             <div
-                
-                className="w-full border-2 shadow-xl shadow-slate-400 lg:mt-10 lg:mb-10 max-w-md lg:ml-[1%] md:ml-[25%] p-8 space-y-3 rounded-xl dark:text-gray-800"
+                className="w-full border border-slate-200 shadow-xl shadow-indigo-100 max-w-md p-8 space-y-3 rounded-2xl bg-white"
             >
                 <h1 className="text-2xl font-bold text-center">Login</h1>
                 <form
@@ -108,7 +100,7 @@ const Login = () => {
                             name="email"
                             id="email"
                             placeholder="Input Email"
-                            className="w-full px-4 py-3 rounded-md   border-black shadow-xl  focus:border-violet-400 focus:dark:border-violet-600"
+                            className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
                         />
                     </div>
                     <div className="space-y-1 text-sm">
@@ -120,7 +112,7 @@ const Login = () => {
                             name="password"
                             id="password"
                             placeholder="Password"
-                            className="w-full px-4 py-3 rounded-md  border shadow-xl border-black    focus:border-violet-400 focus:dark:border-violet-600"
+                            className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
                         />
                         <div className="flex justify-end text-xs  dark:text-gray-600">
                             <a
@@ -133,7 +125,7 @@ const Login = () => {
                     </div>
 
                     <button
-                        className="btn btn-accent w-full  p-3 text-center rounded-sm  dark:text-gray-50  dark:bg-violet-600"
+                        className="w-full p-3 text-center rounded-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-500 transition-colors"
                     >
                         Login
                     </button>

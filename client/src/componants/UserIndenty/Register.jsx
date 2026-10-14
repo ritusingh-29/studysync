@@ -1,3 +1,4 @@
+import { updateProfile } from "firebase/auth";
 import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
@@ -40,37 +41,34 @@ const Register = () => {
 
     createUser(email, password)
       .then((result) => {
-        // console.log(result.user);
-        toast.success("Successfully Registered");
-        form.reset()
-      
+        return updateProfile(result.user, {
+          displayName: name,
+          photoURL: photoURL,
+        });
       })
-      .then((error) => {
-        // console.log(error.message);
+      .then(() => {
+        toast.success("Successfully Registered");
+        setErrorMessage("");
+        form.reset();
+      })
+      .catch((error) => {
         toast.error(error.message);
       });
   };
 
   return (
-    <div
-      className="hero min-h-screen"
-      style={{
-        backgroundImage:
-        "url(https://img.freepik.com/premium-vector/white-gray-wave-abstract-background-soft-design-graphic-work_41084-469.jpg?size=626&ext=jpg&ga=GA1.1.1369675164.1715212800&semt=ais)",
-      }}
-    >
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-violet-50 py-10">
       <Helmet><title>Register</title></Helmet>
-      <div className="hero min-h-screen dark:bg-gray-100 dark:text-gray-800 ">
-        <div className="hero-content flex-col lg:flex-row-reverse">
-          <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">Register Now </h1>
-            <p className="py-6">
-            Online group study fosters collaboration and enhances learning. By connecting with peers virtually, <br />
-             students can share resources, discuss topics, and support each other, <br />
-              making study sessions more engaging and productive.
-            </p>
-          </div>
-          <div className="card shrink-0 w-full  max-w-sm shadow-2xl ">
+      <div className="max-w-5xl mx-auto px-4 hero-content flex-col lg:flex-row-reverse gap-10">
+        <div className="text-center lg:text-left">
+          <h1 className="text-5xl font-bold text-slate-800">Register Now</h1>
+          <p className="py-6 text-slate-500">
+          Online group study fosters collaboration and enhances learning. By connecting with peers virtually, <br />
+           students can share resources, discuss topics, and support each other, <br />
+            making study sessions more engaging and productive.
+          </p>
+        </div>
+        <div className="card shrink-0 w-full max-w-sm bg-white shadow-xl shadow-indigo-100 border border-slate-200 rounded-2xl">
             <h1 className="text-center text-2xl mt-5 font-semibold">
               Register
             </h1>
@@ -81,10 +79,10 @@ const Register = () => {
                 </label>
                 <input
                   id="name"
-                  type="name"
+                  type="text"
                   placeholder="name"
                   name="name"
-                  className="input input-bordered"
+                  className="input input-bordered w-full"
                   required
                 />
               </div>
@@ -134,7 +132,7 @@ const Register = () => {
                 </label>
               </div>
               <div className="form-control mt-6">
-                <button className="btn btn-accent">Submit</button>
+                <button className="btn border-none bg-indigo-600 hover:bg-indigo-500 text-white">Submit</button>
               </div>
               {errorMessage && <p className="text-red-500">{errorMessage}</p>}
               <p className="text-xs text-center  sm:px-6  dark:text-gray-600">
@@ -145,7 +143,6 @@ const Register = () => {
                 </NavLink>
               </p>
             </form>
-          </div>
         </div>
       </div>
     </div>
